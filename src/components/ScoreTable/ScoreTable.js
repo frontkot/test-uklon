@@ -9,6 +9,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import WinnerIcon from '../WinnerIcon/WinnerIcon';
+import { getData } from '../../store/userItems/selectors';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles({
   container: {
@@ -25,13 +27,12 @@ const useStyles = makeStyles({
   }
 });
 
-const ScoreTable = ({
-  arr
-}) => {
+const ScoreTable = () => {
   const classes = useStyles();
   const { container, table, theadCell, trowItem } = classes;
+  const userItems = useSelector(getData);
 
-  const arrWithScore = arr
+  const arrWithScore = userItems
                         .map((e) => ({score: e.value.reduce((prev, cur) => prev + cur), ...e}))
                         .sort((a,b) => b.score - a.score);
 

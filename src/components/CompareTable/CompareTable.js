@@ -8,19 +8,25 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import { useSelector } from 'react-redux';
+import { getData } from '../../store/userItems/selectors';
 
 const useStyles = makeStyles({
-  
+  container: {
+    boxShadow: 'none',
+    minWidth: '15em',
+    maxWidth: '20em',
+  },
+
 })
 
-const CompareTable = ({
-  arr
-}) => {
+const CompareTable = () => {
   const classes = useStyles();
-  const { thead,  } = classes;
+  const { thead, container } = classes;
+  const userItems = useSelector(getData);
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} className={container}>
       <Table size='small' aria-label='adanse table'>
         <TableHead className={thead}>
           Compare Items
