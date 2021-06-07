@@ -29,8 +29,13 @@ const ScoreTable = ({
   arr
 }) => {
   const classes = useStyles();
-
   const { container, table, theadCell, trowItem } = classes;
+
+  const arrWithScore = arr
+                        .map((e) => ({score: e.value.reduce((prev, cur) => prev + cur), ...e}))
+                        .sort((a,b) => b.score - a.score);
+
+  const highestValue = arrWithScore[0].score;
 
   return (
     <TableContainer component={Paper} className={container}>
@@ -43,13 +48,13 @@ const ScoreTable = ({
           </TableRow>
         </TableHead>
         <TableBody>
-          {arr.map((item, index) => (
+          {arrWithScore.map((item, index) => (
             <TableRow key={index}>
               <TableCell className={trowItem} component='th' scope='row'>
                 {item.name}
               </TableCell>
               <TableCell align='center'>{item.score}</TableCell>
-              <TableCell align='center'>{index ? null : <WinnerIcon />}</TableCell>
+              <TableCell align='center'>{item.score === highestValue ? <WinnerIcon /> : null}</TableCell>
             </TableRow>
           ))}
         </TableBody>

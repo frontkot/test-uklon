@@ -4,10 +4,10 @@ import ScoreTable from './components/ScoreTable/ScoreTable';
 import UserInput from './components/UserInput/UserInput';
 
 const arr = [
-  {name: 'a', score: '4'},
-  {name: 'b', score: '3'},
-  {name: 'c', score: '2'},
-  {name: 'd', score: '1'},
+  {name: 'a', value: [null, true, true, true]},
+  {name: 'b', value: [false, null, true, true]},
+  {name: 'c', value: [false, false, null, true]},
+  {name: 'd', value: [false, false, false, null]},
 ];
 
 
