@@ -81,12 +81,7 @@ const CompareTable = () => {
     })
 
     dispatch(updateData(newData))    
-    
   }
-
-  
-
-
 
   return (
     <div className='table-content'>
