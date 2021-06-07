@@ -1,8 +1,10 @@
 .app {
   &__container {
     margin: 50px;
-    display: flex;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: baseline;
+    justify-items: center;
   };
   &__entry-field {
     display: grid;

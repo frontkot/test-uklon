@@ -2,15 +2,27 @@ import './App.scss';
 import CompareTable from './components/CompareTable/CompareTable';
 import ScoreTable from './components/ScoreTable/ScoreTable';
 import UserInput from './components/UserInput/UserInput';
+import { useSelector, useDispatch } from 'react-redux';
+import { getData } from './store/userItems/selectors';
+import { loadData } from './store/userItems/actions';
+import { useEffect } from 'react';
 
 const App = () => {
+  const isUserItems = useSelector(getData).length;
+  const dispatch = useDispatch();
+
+
+  useEffect(() => {
+    dispatch(loadData());
+  }, [dispatch])
+  
   return (
     <div className='app__container'>
       <div className='app__entry-field'>
         <UserInput />
-        <ScoreTable />
+        {isUserItems ? <ScoreTable /> :  null}
       </div>
-      <CompareTable />
+      {isUserItems ? <CompareTable /> : null}
     </div>
   );
 }
