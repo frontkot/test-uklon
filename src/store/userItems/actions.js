@@ -1,11 +1,11 @@
 import { LOAD_DATA, UPDATE_DATA } from './actionTypes';
 
-export const setHeaderData = (data) => ({
+export const loadData = (data) => ({
   type: LOAD_DATA,
   payload: data,
 });
 
-export const headerDataLoading = (data) => ({
+export const updateData = (data) => ({
   type: UPDATE_DATA,
   payload: data,
 });

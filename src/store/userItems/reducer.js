@@ -14,7 +14,7 @@ const reducer = (state = initialState, action) => {
     case LOAD_DATA:
       return { ...state, ...action.payload };
     case UPDATE_DATA:
-      return { ...state, ...action.payload };
+      return { ...state, data: action.payload };
     default:
       return state;
   }
