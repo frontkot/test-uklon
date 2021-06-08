@@ -14,6 +14,7 @@ import { updateData } from '../../store/userItems/actions';
 const CompareTable = () => {
   const userItems = useSelector(getData);
   const dispatch = useDispatch();
+  const mainClass = 'table';
   
   const numOfUserItems = userItems.length;
   let renderArr = [];  
@@ -54,20 +55,19 @@ const CompareTable = () => {
   }
 
   return (
-    <div className='table__section'>
-      <h3 className='table__header'>Compare Items</h3>
-      <TableContainer component={Paper} className='table__container'>
-        <Table className='table__content'>
-          <TableBody className='table__body'>
+    <div className={`${mainClass}__section`}>
+      <h3 className={`${mainClass}__header`}>Compare Items</h3>
+      <TableContainer component={Paper} className={`${mainClass}__container`}>
+        <Table className={`${mainClass}__content`}>
+          <TableBody className={`${mainClass}__body`}>
             {renderArr.map((item, index) => (
-              <TableRow key={index} className='table__row' onClick={(e) => toggleItem(e)}>
-                <TableCell id={item.id} className={item.firstItemIsMore ? 'table__cell-active table__cell' : 'table__cell'} component='th' scope='row'>
+              <TableRow key={index} className={`${mainClass}__row`} onClick={(e) => toggleItem(e)}>
+                <TableCell id={item.id} className={item.firstItemIsMore ? `${mainClass}__cell-active table__cell` : `${mainClass}__cell`} component='th' scope='row'>
                   {item.firstItemName}
                 </TableCell>
-                <TableCell id={item.id} className={item.secondItemIsMore ? 'table__cell-active table__cell' : 'table__cell'} >
+                <TableCell id={item.id} className={item.secondItemIsMore ? `${mainClass}__cell-active table__cell` : `${mainClass}__cell`}>
                   {item.secondItemName}
                 </TableCell>
-
               </TableRow>
             ))}
           </TableBody>

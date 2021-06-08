@@ -6,16 +6,35 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getData } from '../../store/userItems/selectors';
 import { updateData } from '../../store/userItems/actions';
 
-
-const validationSchema = yup.object().shape({
-  item: yup
-    .string()
-    .required('Required')
-})
-
 const UserInput = () => {
   const data = useSelector(getData);
   const dispatch = useDispatch();
+
+  yup.addMethod(yup.string, 'uniqueName', function isUniwueName(message) {
+    return this.test(`test-uniwue-name`, message, function (value) {
+      const { path, createError } = this;
+      let names;
+  
+      if (data.length > 0) {
+        names = data.map(e => e.name);
+      }
+
+      const isUnique = value !== undefined && data.length > 0 ? !names.includes(value.toLowerCase()) : true;
+  
+      return (
+        isUnique ||
+        createError({ path, message: message })
+      );
+    });
+  })
+  
+  const validationSchema = yup.object().shape({
+    item: yup
+      .string()
+      .required('Required')
+      .uniqueName('This item already exists')
+  })
+  
 
   const initialValues = { item: '', }
 
@@ -39,9 +58,9 @@ const UserInput = () => {
       data.forEach(e => e.value.push(true))
     };
     
-    data.push(newItem);
+    const newData = [...data, newItem];
 
-    dispatch(updateData(data));
+    dispatch(updateData(newData));
     actions.resetForm()
   }
 
@@ -59,11 +78,9 @@ const UserInput = () => {
           <Field
             type='text'
             name='item'
-            placeholder='New item'
+            placeholder={data.length ? 'New item' : 'Add your first item'}
             className='user__unput'
-            errors={errors.item}
           />
-          
           <Field 
             type='submit'
             name='submit'

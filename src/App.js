@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getData } from './store/userItems/selectors';
 import { loadData } from './store/userItems/actions';
 import { useEffect } from 'react';
+import ResetButton from './components/ResetButton/ResetButton';
 
 const App = () => {
   const isUserItems = useSelector(getData).length;
@@ -16,13 +17,16 @@ const App = () => {
   }, [dispatch])
   
   return (
-    <div className='app__container'>
-      <div className='app__entry-field'>
-        <UserInput />
-        {isUserItems ? <ScoreTable /> :  null}
+    <>
+      {isUserItems ? <ResetButton/> : null}
+      <div className='app__container'>
+        <div className='app__entry-field'>
+          <UserInput />
+          {isUserItems ? <ScoreTable /> :  null}
+        </div>
+        {isUserItems ? <CompareTable /> : null}
       </div>
-      {isUserItems ? <CompareTable /> : null}
-    </div>
+    </>
   );
 }
 
