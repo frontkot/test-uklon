@@ -1,47 +1,17 @@
 import React from 'react';
 import './CompareTable.scss';
-import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { useSelector, useDispatch } from 'react-redux';
 import { getData } from '../../store/userItems/selectors';
 import { updateData } from '../../store/userItems/actions';
 
-const useStyles = makeStyles({
-  body: {
-    borderCollpse: 'initial',
-  },
-  table: {
-    borderCollpse: 'initial',
-    width: '80%',
-  },
-
-  container: {
-    boxShadow: 'none',
-    minWidth: '10em',
-    maxWidth: '15em',
-  },
-  cell: {
-    padding: '2px 5px',
-    border: '1px solid grey',
-    borderRadius: '5px',
-    
-  },
-  cellActive: {
-    fontWeight: 700,
-    background: 'blue',
-  },
-
-})
 
 const CompareTable = () => {
-  const classes = useStyles();
-  const { thead, container, cell, cellActive, table, body } = classes;
   const userItems = useSelector(getData);
   const dispatch = useDispatch();
   
@@ -84,17 +54,17 @@ const CompareTable = () => {
   }
 
   return (
-    <div className='table-content'>
-      <h3>Compare Items</h3>
-      <TableContainer component={Paper} className={container}>
-        <Table className={table}>
-          <TableBody className={body}>
+    <div className='table__section'>
+      <h3 className='table__header'>Compare Items</h3>
+      <TableContainer component={Paper} className='table__container'>
+        <Table className='table__content'>
+          <TableBody className='table__body'>
             {renderArr.map((item, index) => (
-              <TableRow key={index} onClick={(e) => toggleItem(e)}>
-                <TableCell id={item.id} className={item.firstItemIsMore ? `${cellActive} ${cell}` : cell} component='th' scope='row'>
+              <TableRow key={index} className='table__row' onClick={(e) => toggleItem(e)}>
+                <TableCell id={item.id} className={item.firstItemIsMore ? 'table__cell-active table__cell' : 'table__cell'} component='th' scope='row'>
                   {item.firstItemName}
                 </TableCell>
-                <TableCell id={item.id} className={item.secondItemIsMore ? `${cellActive} ${cell}` : cell} >
+                <TableCell id={item.id} className={item.secondItemIsMore ? 'table__cell-active table__cell' : 'table__cell'} >
                   {item.secondItemName}
                 </TableCell>
 

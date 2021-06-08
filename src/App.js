@@ -11,7 +11,6 @@ const App = () => {
   const isUserItems = useSelector(getData).length;
   const dispatch = useDispatch();
 
-
   useEffect(() => {
     dispatch(loadData());
   }, [dispatch])

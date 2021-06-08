@@ -10,8 +10,7 @@ import { updateData } from '../../store/userItems/actions';
 const validationSchema = yup.object().shape({
   item: yup
     .string()
-    .typeError('Введите новый айтем')
-    .required('Введите данные')
+    .required('Required')
 })
 
 const UserInput = () => {
@@ -20,7 +19,7 @@ const UserInput = () => {
 
   const initialValues = { item: '', }
 
-  const addNewItem = (value) => {
+  const addNewItem = (value, actions) => {
     const dataLength = data.length;
     const newItemValue = [];
     for (let i = 0; i <= dataLength; i++) {
@@ -43,37 +42,38 @@ const UserInput = () => {
     data.push(newItem);
 
     dispatch(updateData(data));
-
-    console.log(data)
+    actions.resetForm()
   }
-
-
-
 
 
 
   return (
     <Formik
       initialValues={initialValues}
-      // validationSchema={validationSchema}
-      onSubmit={(value) => addNewItem(value)}
+      validationSchema={validationSchema}
+      onSubmit={(value, actions) => addNewItem(value, actions)}
     >
-      {({ errors }) => (
-        <Form className=''>
+      {({ errors, isSubmitting }) => (
+        <>
+        <Form className='user__form'>
           <Field
             type='text'
             name='item'
             placeholder='New item'
-            className=''
-            errors={errors}
+            className='user__unput'
+            errors={errors.item}
           />
+          
           <Field 
             type='submit'
             name='submit'
-            className=''
+            disabled={isSubmitting}
+            className='user__submit'
             value='Add'
           />
         </Form>
+        {errors ? <p className='user__error'>{errors.item}</p> : null}
+        </>
       )
       }
     </Formik>
