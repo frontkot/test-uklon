@@ -3,7 +3,7 @@
     margin: 50px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    align-items: baseline;
+    align-items: flex-start;
     justify-items: center;
   };
   &__entry-field {
