@@ -72,7 +72,6 @@ const CompareTable = () => {
             ))}
           </TableBody>
         </Table>
-        
       </TableContainer>
     </div>
   );

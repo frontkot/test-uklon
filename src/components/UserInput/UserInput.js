@@ -35,9 +35,6 @@ const UserInput = () => {
       .uniqueName('This item already exists')
   })
   
-
-  const initialValues = { item: '', }
-
   const addNewItem = (value, actions) => {
     const dataLength = data.length;
     const newItemValue = [];
@@ -64,32 +61,30 @@ const UserInput = () => {
     actions.resetForm()
   }
 
-
-
   return (
     <Formik
-      initialValues={initialValues}
+      initialValues={{ item: '' }}
       validationSchema={validationSchema}
       onSubmit={(value, actions) => addNewItem(value, actions)}
     >
       {({ errors, isSubmitting }) => (
         <>
-        <Form className='user__form'>
-          <Field
-            type='text'
-            name='item'
-            placeholder={data.length ? 'New item' : 'Add your first item'}
-            className='user__unput'
-          />
-          <Field 
-            type='submit'
-            name='submit'
-            disabled={isSubmitting}
-            className='user__submit'
-            value='Add'
-          />
-        </Form>
-        {errors ? <p className='user__error'>{errors.item}</p> : null}
+          <Form className='user__form'>
+            <Field
+              type='text'
+              name='item'
+              placeholder={data.length ? 'New item' : 'Add your first item'}
+              className='user__unput'
+            />
+            <Field 
+              type='submit'
+              name='submit'
+              disabled={isSubmitting}
+              className='user__submit'
+              value='Add'
+            />
+          </Form>
+          {errors ? <p className='user__error'>{errors.item}</p> : null}
         </>
       )
       }
