@@ -10,3 +10,13 @@
     display: grid;
   }
 }
+
+
+@media screen and (max-width: 480px) {
+  .app{
+    &__container {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+  }
+}
